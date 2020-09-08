@@ -18,7 +18,10 @@ public class spawnGumball : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.E))
         {
-            createGumball();
+            for(int i = 0; i < 10; i++)
+            {
+                createGumball();
+            }
         }
     }
 
