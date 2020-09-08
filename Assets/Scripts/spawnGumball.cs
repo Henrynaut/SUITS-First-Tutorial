@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using TMPro;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,7 +8,9 @@ public class spawnGumball : MonoBehaviour
 
     public GameObject gumballPrefab;
     public GameObject thisGumball;
+    public TextMeshProUGUI gumballText;
     private int numberOfGumballs;
+    private int gumballCount;
 
     [SerializeField]
     private Material[] _materials;
@@ -19,6 +22,7 @@ public class spawnGumball : MonoBehaviour
     void Start()
     {
         numberOfGumballs = 100;
+        gumballCount = 0;
     }
 
     // Update is called once per frame
@@ -65,9 +69,14 @@ public class spawnGumball : MonoBehaviour
     {
         yield return new WaitForSeconds(time);
 
+        //Spawn gumball and change material
         thisGumball = Instantiate(gumballPrefab, new Vector3(0,0,0), Quaternion.identity);
         _renderer = thisGumball.GetComponent<Renderer>();
         ChangeMaterial();
+
+        //Update gumballCount
+        gumballCount++;
+        gumballText.text = "Number of Gumballs: " + gumballCount.ToString(); 
 
         runningCoroutine = null;
         if (coroutineQueue.Count > 0)
